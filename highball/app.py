@@ -5,7 +5,7 @@ import os
 #api_key = "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"
 
 # OpenAI API 키 설정
-openai.api_key = os.getenv("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")
+openai.api_key = "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"
 
 # Streamlit 앱 설정
 st.title("GPT-3.5 Turbo 챗봇")
