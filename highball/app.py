@@ -3,12 +3,7 @@ import openai
 import os
 # OpenAI API 키 설정 (실제 키로 교체해야 함)
 #api_key = "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"
-
-api_key = os.getenv("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")  # 환경 변수에서 API 키 가져오기
-if api_key is None:
-    st.write("환경 변수 OPENAI_API_KEY가 설정되지 않았습니다.")
-else:
-    openai.api_key = api_key
+openai.api_key = "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"
 
 # Streamlit 앱 설정
 st.title("GPT-3.5 Turbo 챗봇")
