@@ -3,9 +3,12 @@ import openai
 import os
 # OpenAI API 키 설정 (실제 키로 교체해야 함)
 #api_key = "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"
-#
-# OpenAI API 키 설정
-openai.api_key = "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"
+
+api_key = os.getenv("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")  # 환경 변수에서 API 키 가져오기
+if api_key is None:
+    st.write("환경 변수 OPENAI_API_KEY가 설정되지 않았습니다.")
+else:
+    openai.api_key = api_key
 
 # Streamlit 앱 설정
 st.title("GPT-3.5 Turbo 챗봇")
@@ -20,7 +23,7 @@ if user_input:
         messages=[
             {
                 "role": "system",
-                "content": "너는 그날에 기분따라 하이볼을 추천해주는 하이볼 추천 봇이야. 너는 상대방과 대화 이후 하이볼 메뉴이름을 말해주고 그에 관련된 레시피를 알려줘야해 질문자는 레몬,산토리위스키, 진저에일만 가지고있어 그에따라 추천을해줘 "
+                "content": "너는 그날에 기분따라 하이볼을 추천해주는 하이볼 추천 봇이야. 너는 상대방과 대화 이후 하이볼 메뉴이름을 말해주고 그에 관련된 레시피를 알려줘야해. 질문자는 레몬, 산토리 위스키, 진저에일만 가지고 있어. 그에 따라 추천을 해줘."
             },
             {
                 "role": "assistant",
