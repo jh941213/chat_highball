@@ -3,7 +3,7 @@ import openai
 import os
 # OpenAI API 키 설정 (실제 키로 교체해야 함)
 #api_key = "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"
-
+#
 # OpenAI API 키 설정
 openai.api_key = "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"
 
