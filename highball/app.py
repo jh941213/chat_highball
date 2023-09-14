@@ -27,7 +27,7 @@ def extract_recipe_and_message(output):
 
 
 # API 키는 외부에 노출되지 않도록 조심하세요
-openai.api_key = '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'
+openai.api_key = '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'
 
 def generate_response(user_input, past_conversations):
     conversation = [
