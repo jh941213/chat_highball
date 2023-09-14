@@ -2,7 +2,7 @@ import openai
 import streamlit as st
 #from streamlit_chat import message
 import base64
-import serial
+#import serial
 
 # Raspberry Pi Pico와 연결
 #ser = serial.Serial('/dev/cu.usbmodem1301', 9600)
