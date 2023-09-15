@@ -1,8 +1,8 @@
 import openai
 import streamlit as st
-#from streamlit_chat import message
+from streamlit_chat import message
 import base64
-#import serial
+import serial
 
 # Raspberry Pi Pico와 연결
 #ser = serial.Serial('/dev/cu.usbmodem1301', 9600)
@@ -16,18 +16,18 @@ def extract_recipe_and_message(output):
     if recipe_start != -1 and message_start != -1:
         recipe = output[recipe_start:message_start].strip()
         message = output[message_start:].strip()
-        print("------------")
+        print("--------------")
         print(recipe)
-        print("------------")
+        print("--------------")
         print(message)
-        print("------------")
+        print("--------------")
         return recipe, message
     else:
         return None, None
 
 
 # API 키는 외부에 노출되지 않도록 조심하세요
-openai.api_key = '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'
+openai.api_key = 'Your API Key'
 
 def generate_response(user_input, past_conversations):
     conversation = [
@@ -53,7 +53,11 @@ def generate_response(user_input, past_conversations):
         },
         {
             "role": "system",
-            "content": "반드시 결과를 출력할때 재료: 하고 출력하고 오늘의메시지: 하고 출력해줘야해"
+            "content": "반드시 결과를 출력할때 재료: 하고 출력하고 오늘의메시지: 하고 출력해줘"
+        },
+        {
+            "role": "system",
+            "content": "그에 어울리는 오늘의 안주도 출력해줘 오늘의 안주 : 하고 출력해줘 그 뒤로 다른 메시지는 절대 출력하지마"
         },
     ]
     
@@ -83,8 +87,11 @@ def get_image_base64(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode()
     
-st.header("🥂백종원이 추천해주는 오늘의 하이볼")
+st.header("🥂인공지능 하이볼 머신")
+st.markdown("똥손들도 걱정없이 만드는 정량 하이볼")
 st.markdown("[My blogl](https://velog.io/@jh1213)")
+st.image("/Users/jaehyun/Desktop/09_ccc/channels4_profile.jpg", use_column_width=True)
+
 
 if 'conversations' not in st.session_state:
     st.session_state['conversations'] = []
@@ -109,12 +116,6 @@ if submitted and user_input:
 
     recipe, message = extract_recipe_and_message(output)
     
-    if recipe and message:
-        print(recipe)
-        send_to_pico(recipe)
-        print(message)
-        send_to_pico(message)
-
 if st.session_state['conversations']:
     for message in st.session_state['conversations']:
         if message['role'] == 'user':
